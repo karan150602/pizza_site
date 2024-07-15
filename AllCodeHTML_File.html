@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OptiPhoenix Assignment</title>
+    <link rel="stylesheet" href="index.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+      body {
+        margin: 0;
+        background-image: url("https://www.pizzahut.co.in/_next/static/static/images/app-bg.9637f025c0a8602011051ed056e61616.jpg");
+      }
+
+      /* Navbar */
+      nav {
+        background-color: #fff;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+      }
+
+      img {
+        height: 40px;
+      }
+
+      .shopping {
+        position: relative;
+        text-align: right;
+      }
+
+      .shopping img {
+        width: 30px;
+      }
+
+      .shopping span {
+        background-color: red;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        position: absolute;
+        top: -5px;
+        left: 80%;
+        padding: 3px 10px;
+      }
+
+      /* Heading */
+      .container {
+        text-align: center;
+      }
+
+      .centered-heading {
+        display: inline-block;
+        position: relative;
+        font-size: 24px;
+      }
+
+      .centered-heading::before,
+      .centered-heading::after {
+        content: "";
+        position: absolute;
+        height: 2px;
+        top: 35%;
+        width: 600px;
+        background-color: #c8c4c4;
+      }
+
+      .centered-heading::before {
+        left: 100%;
+        margin-left: 15px;
+      }
+
+      .centered-heading::after {
+        right: 100%;
+        margin-right: 15px;
+      }
+
+      /*List*/
+      .list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 20px;
+        row-gap: 20px;
+        margin-top: 50px;
+      }
+      .list .item {
+        text-align: left;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 50px 50px #757676;
+        letter-spacing: 1px;
+      }
+      .list .item img {
+        width: 100%;
+        height: fit-content;
+        object-fit: cover;
+        margin-bottom: 10px;
+      }
+      .list .item .title {
+        font-weight: 600;
+        margin-bottom: 50px;
+      }
+      .list .item .description {
+        color: rgb(83, 82, 82);
+        margin-bottom: 20px;
+      }
+      .list .item .price {
+        margin-top: 10px;
+        text-align: center;
+      }
+      .list .item .drop-head {
+        text-align: left;
+      }
+      .list .item select {
+        width: 100%;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        padding: 10px 20px;
+        padding-left: 2%;
+        background-color: rgb(247, 244, 244);
+        border-radius: 5px;
+        border-color: #fff;
+      }
+      .list .item button {
+        width: 100%;
+        padding: 10px;
+        background-color: #046b31;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .list .item button:hover {
+        background-color: #0056b3;
+      }
+
+      .card {
+        position: fixed;
+        top: 0;
+        left: 100%;
+        width: 500px;
+        background-color: #fff;
+        height: 100vh;
+        transition: 0.5s;
+      }
+      .active .card {
+        left: calc(100% - 500px);
+      }
+      .active .container {
+        transform: translateX(-200px);
+      }
+      .card h1 {
+        color: black;
+        font-weight: 600;
+        margin: auto;
+        padding: 10px 20px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+      }
+      .card .checkOut {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .card .checkOut div {
+        background-color: #046b31;
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        cursor: pointer;
+        color: #1c1f25;
+      }
+      .card .checkOut div:nth-child(2) {
+        background-color: #1c1f25;
+        color: #fff;
+      }
+
+      .listCard li {
+        display: grid;
+        grid-template-columns: 100px repeat(3, 1fr);
+        color: #fff;
+        row-gap: 10px;
+      }
+      .listCard li div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #1c1f25;
+      }
+      .listCard li img {
+        width: 90%;
+      }
+      .listCard li button {
+        background-color: #fff5;
+        border: none;
+      }
+      .listCard .count {
+        margin: 0 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <img
+          src="https://www.uengage.in/images/addo/logos/lapinoz-logo.png"
+          alt="Logo"
+        />
+        <div class="shopping">
+          <img src="shopping.svg" alt="cart" />
+          <span class="quantity">0</span>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1 class="centered-heading">Newly Launched</h1>
+      </div>
+
+      <div class="list"></div>
+    </div>
+
+    <div class="card">
+      <h1>Your Basket</h1>
+      <ul class="listCard"></ul>
+      <div class="checkOut">
+        <div class="total">0</div>
+        <div class="closeShopping">Close</div>
+      </div>
+    </div>
+
+    <script>
+      let openShopping = document.querySelector(".shopping");
+      let closeShopping = document.querySelector(".closeShopping");
+      let list = document.querySelector(".list");
+      let listCard = document.querySelector(".listCard");
+      let body = document.querySelector("body");
+      let total = document.querySelector(".total");
+      let quantity = document.querySelector(".quantity");
+
+      openShopping.addEventListener("click", () => {
+        body.classList.add("active");
+      });
+      closeShopping.addEventListener("click", () => {
+        body.classList.remove("active");
+      });
+
+      let products = [
+        {
+          id: 1,
+          name: "Margherita",
+          image:
+            "https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/margherita.90f9451fd66871fb6f9cf7d506053f18.1.jpg",
+          description:
+            "Pizza topped with our herb-infused signature pan sauce and 100% mozzarella cheese. A classic treat for all cheese lovers out there!",
+          price: "139",
+        },
+        {
+          id: 2,
+          name: "Schezwan Margherita",
+          image:
+            "https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/schezwan-margherita.4371d9483546db47a97c5503ccad0c2f.1.jpg",
+          description:
+            "Your very own Margherita, now with a spicy twist! Loaded with our signature spicy schezwan sauce & 100% mozzarella cheese.",
+          price: "339",
+        },
+        {
+          id: 3,
+          name: "Mazedar Makhni Paneer",
+          image:
+            "https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/mazedar-makhni-paneer.cb3150d2be9cb8dcd248be70921c5196.1.jpg?width=600",
+          description:
+            "A treat for all makhni lovers. Spiced paneer, onion, juicy red bell peppers with our new flavourful makhni sauce, topped with 100% mozzarella cheese and buttery spice sprinkle ",
+          price: "199",
+        },
+        {
+          id: 4,
+          name: "Ultimate Tandoori Veggie",
+          image:
+            "https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/awesome-american-cheesy.17f198e5a73db40c367ddfe96da54a4c.1.jpg",
+          description:
+            "Your very own Margherita, now with a spicy twist! Loaded with our signature spicy schezwan sauce & 100% mozzarella cheese.",
+          price: "409",
+        },
+        {
+          id: 5,
+          name: "Mexican Fiesta",
+          image:
+            "https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/awesome-american-cheesy.17f198e5a73db40c367ddfe96da54a4c.1.jpg",
+          description:
+            "Your very own Margherita, now with a spicy twist! Loaded with our signature spicy schezwan sauce & 100% mozzarella cheese.",
+          price: "299",
+        },
+        {
+          id: 6,
+          name: "Awesome American Cheesy Chicken",
+          image:
+            "https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/awesome-american-cheesy.17f198e5a73db40c367ddfe96da54a4c.1.jpg",
+          description:
+            "Your very own Margherita, now with a spicy twist! Loaded with our signature spicy schezwan sauce & 100% mozzarella cheese.",
+          price: "105",
+        },
+        {
+          id: 7,
+          name: "Nawabi Murg Makhni",
+          image:
+            "https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/awesome-american-cheesy.17f198e5a73db40c367ddfe96da54a4c.1.jpg",
+          description:
+            "Your very own Margherita, now with a spicy twist! Loaded with our signature spicy schezwan sauce & 100% mozzarella cheese.",
+          price: "110",
+        },
+        {
+          id: 8,
+          name: "Tandoori Paneer",
+          image:
+            "https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/awesome-american-cheesy.17f198e5a73db40c367ddfe96da54a4c.1.jpg",
+          description:
+            "Your very own Margherita, now with a spicy twist! Loaded with our signature spicy schezwan sauce & 100% mozzarella cheese.",
+          price: "250",
+        },
+        {
+          id: 9,
+          name: "Veggie Supreme",
+          image:
+            "https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/awesome-american-cheesy.17f198e5a73db40c367ddfe96da54a4c.1.jpg",
+          description:
+            "Your very own Margherita, now with a spicy twist! Loaded with our signature spicy schezwan sauce & 100% mozzarella cheese.",
+          price: "300",
+        },
+        {
+          id: 10,
+          name: "Chicken Sausage",
+          image:
+            "https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/mazedar-makhni-paneer.cb3150d2be9cb8dcd248be70921c5196.1.jpg?width=600",
+          description:
+            "A treat for all makhni lovers. Spiced paneer, onion, juicy red bell peppers with our new flavourful makhni sauce, topped with 100% mozzarella cheese and buttery spice sprinkle ",
+          price: "210",
+        },
+      ];
+      let listCards = [];
+      function initApp() {
+        products.forEach((value, key) => {
+          let newDiv = document.createElement("div");
+          newDiv.classList.add("item");
+          newDiv.innerHTML = `
+            <img src="${value.image}">
+            <div class="title">${value.name}</div>
+            <div class="description">${value.description}</div>
+            <div class="drop-head">Select your size & crust</div>
+            <select id="dropdown">
+                <option value="option1">Personal Plan</option>
+                <option value="option2">Personal Stuffed Crust Maxx</option>
+                <option value="option3">Medium Pan</option>
+                <option value="option4">Medium Stuffed Crust Maxx</option>
+                <option value="option5">Thin n Large Thin n Crispy</option>
+            </select>
+            <div class="btn">
+                <button onclick="addToCard(${key})">Add To Card</button>
+                <div class="price">Rs ${value.price.toLocaleString()}</div>
+            </div>`;
+          list.appendChild(newDiv);
+        });
+      }
+
+      initApp();
+
+      function addToCard(key) {
+        if (listCards[key] == null) {
+          // copy product form list to list card
+          listCards[key] = JSON.parse(JSON.stringify(products[key]));
+          listCards[key].quantity = 1;
+        }
+        reloadCard();
+      }
+
+      function reloadCard() {
+        listCard.innerHTML = "";
+        let count = 0;
+        let totalPrice = 0;
+        listCards.forEach((value, key) => {
+          totalPrice = totalPrice + value.price;
+          count = count + value.quantity;
+          if (value != null) {
+            let newDiv = document.createElement("li");
+            newDiv.innerHTML = `
+                <div><img src="${value.image}"/></div>
+                <div>${value.name}</div>
+                <div>${value.price.toLocaleString()}</div>
+                <div>
+                    <button onclick="changeQuantity(${key}, ${
+              value.quantity - 1
+            })">-</button>
+                    <div class="count">${value.quantity}</div>
+                    <button onclick="changeQuantity(${key}, ${
+              value.quantity + 1
+            })">+</button>
+                </div>`;
+            listCard.appendChild(newDiv);
+          }
+        });
+        total.innerText = totalPrice.toLocaleString();
+        quantity.innerText = count;
+      }
+
+      function changeQuantity(key, quantity) {
+        if (quantity == 0) {
+          delete listCards[key];
+        } else {
+          listCards[key].quantity = quantity;
+          listCards[key].price = quantity * products[key].price;
+        }
+        reloadCard();
+      }
+    </script>
+
+  </body>
+</html>
